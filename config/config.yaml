@@ -1,0 +1,29 @@
+data:
+  train_dir: /home/hskim7838/deepfake_detector/Effort/train_data
+  val_dir: /home/hskim7838/deepfake_detector/Effort/test_data/CDF_v2
+  val_file: List_of_testing_videos.txt
+  test_dir: /home/hskim7838/deepfake_detector/Effort/test_data/CDF_v2
+  test_file: List_of_testing_videos.txt
+  size: 224
+  num_frames_train: 8
+  num_frames_test: 32
+
+model:
+  name: "Effort-CLIP-ViT-L-14"
+  backbone: "openai/clip-vit-large-patch14"
+  r: 200
+  lambda_ksv: 0.1
+
+train:
+  epochs: 20
+  batch_size: 1 
+  lr: 0.000001
+  weight_decay: 0.0001
+  device: "cuda"
+  num_workers: 4 
+  n_repeat: 8
+
+eval:
+  device: "cuda" 
+  output_file: "model/eval_result.txt"
+
