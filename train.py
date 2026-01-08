@@ -54,19 +54,22 @@ def train(config):
 
     for epoch in range(num_epochs):
         total_loss = 0.0
+        best_loss = 100.0
 
         pbar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}", unit="batch")
         for frames_or_img, labels, is_video in pbar:
             if frames_or_img.dim() == 5:
                 B, N, C, H, W = frames_or_img.shape
                 frames_or_img = frames_or_img.view(B * N, C, H, W)
-                labels = labels.unsqueeze(1).expand(-1, N).reshape(-1)
-
-            frames_or_img = frames_or_img.to(device, non_blocking=True, memory_format=torch.channels_last)
-            labels = labels.to(device, non_blocking=True).float()
-
-            logits = model(frames_or_img)
-            loss_cls = criterion(logits, labels)
+                labels = labels.unsqueeze(1).repeat(1, N).reshape(-1).float()
+            else:
+                labels = labels.float()
+        
+        frames_or_img = frames_or_img.to(device, non_blocking=True, memory_format=torch.channels_last)
+        labels = labels.to(device, non_blocking=True)
+        
+        logits = model(frames_or_img)
+        loss_cls = criterion(logits, labels.unsqueeze(1))
 
             loss_ksv = model.compute_ksv_loss()
             loss = loss_cls + model.lambda_ksv * loss_ksv
@@ -79,9 +82,10 @@ def train(config):
             pbar.set_postfix(loss=total_loss / (pbar.n if pbar.n > 0 else 1))
 
         print(f"Epoch {epoch+1}/{num_epochs}, Loss: {total_loss/len(train_loader):.4f}")
-
-        if epoch % 5 == 0:
-            torch.save(model.state_dict(), f"model/model_{epoch}_loss_{total_loss / len(train_loader):.4f}.pt")
+        torch.save(model.state_dict(), f"model/model_{epoch}_loss_{total_loss / len(train_loader):.4f}.pt")
+        if total_loss/len(train_loader) < best_loss:
+            best_loss = total_loss/len(train_loader)
+            torch.save(model.state_dict(), f"model/model_best.pt")
 
 if __name__ == "__main__":
     seed_everything(42)
