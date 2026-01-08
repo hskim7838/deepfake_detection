@@ -1,8 +1,8 @@
 data:
-  train_dir: /home/hskim7838/deepfake_detector/Effort/train_data
-  val_dir: /home/hskim7838/deepfake_detector/Effort/test_data/CDF_v2
+  train_dir: PATH_TO_TRAINING_DATASET
+  val_dir: PATH_TO_VALIDATION_DATASET
   val_file: List_of_testing_videos.txt
-  test_dir: /home/hskim7838/deepfake_detector/Effort/test_data/CDF_v2
+  test_dir: PATH_TO_TEST_DATASET
   test_file: List_of_testing_videos.txt
   size: 224
   num_frames_train: 8
