@@ -65,11 +65,11 @@ def train(config):
             else:
                 labels = labels.float()
         
-        frames_or_img = frames_or_img.to(device, non_blocking=True, memory_format=torch.channels_last)
-        labels = labels.to(device, non_blocking=True)
+            frames_or_img = frames_or_img.to(device, non_blocking=True, memory_format=torch.channels_last)
+            labels = labels.to(device, non_blocking=True)
         
-        logits = model(frames_or_img)
-        loss_cls = criterion(logits, labels.unsqueeze(1))
+            logits = model(frames_or_img)
+            loss_cls = criterion(logits, labels)
 
             loss_ksv = model.compute_ksv_loss()
             loss = loss_cls + model.lambda_ksv * loss_ksv
