@@ -7,7 +7,7 @@ cd deepfake_detection
 conda create -n deepfake python=3.9 -y
 conda activate deepfake
 pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu126
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Download the datasets both training and testing
@@ -15,6 +15,7 @@ pip install -r requirements.txt
 # Create a .json file of your Kaggle account If you don't have your kaggle json file.
 mkdir -p ~/.kaggle
 vim ~/.kaggle/kaggle.json
+
 # Then, write below contents in the .json file without the annotation marks (#).
 # {
 #   "username": "<Your Username of Kaggle>"
