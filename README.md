@@ -1,7 +1,7 @@
 ## Quick Start (Optimized for T4 GPU (16GB))
 
 '''bash
-git clone https://github.com/hskim7838/deepfake_detection
+git clone https://github.com/hskim7838/deepfake_detection\n
 cd deepfake_detection
 conda create -n deepfake python=3.9 -y
 conda activate deepfake
