@@ -12,10 +12,10 @@ pip install -r requirements.txt
 
 ## Download the datasets both training and testing
 ```
-# Create a .json file of your Kaggle account without the annotation mark (#), if you don't have your kaggle json file.
+# Create a .json file of your Kaggle account If you don't have your kaggle json file.
 mkdir -p ~/.kaggle
 vim ~/.kaggle/kaggle.json
-# Then, write below contents in the .json file
+# Then, write below contents in the .json file without the annotation marks (#).
 # {
 #   "username": "<Your Username of Kaggle>"
 #   "key": "<Token of your Kaggle account>"
