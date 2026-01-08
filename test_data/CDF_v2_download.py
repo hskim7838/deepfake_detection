@@ -32,7 +32,7 @@ def download_kaggle_dataset(dataset_slug, download_path="./dataset", unzip=True)
 
 if __name__ == "__main__":
     dataset_slug = "lephanminhkhoa/deepfake-benchmark-cdf-v2"
-    target_path = "./CDF_v2"
+    target_path = "./test_data/CDF_v2"
     
     download_kaggle_dataset(
         dataset_slug=dataset_slug,
